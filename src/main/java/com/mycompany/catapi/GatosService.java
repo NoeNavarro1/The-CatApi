@@ -24,6 +24,8 @@ public class GatosService {
 
     //renderiza una imagen dentro de un JoptionPane
     public void desplegarImagen(Gato unGato,ImageIcon img) throws IOException {
+         StackApi Api = new StackApi();
+         Api.getMeEncanta();
         //crear menú de opciones para JoptionPane
         String menu = "Opciones: \n";
         
@@ -38,11 +40,14 @@ public class GatosService {
             }
 
         }
-        switch (seleccion) {
-            case 0 -> getGatos();
-            default ->{
+        switch (seleccion){
+            case 0:
+                getGatos();
                 break;
-            }
+            case 1:
+                getMeEncanta();
+                System.out.println("Se agrego a tus me encanta <3");
+                break;
         }
     }
 
@@ -92,7 +97,6 @@ public class GatosService {
 
     public void getMeEncanta() throws IOException {
         OkHttpClient client = new OkHttpClient();
-
         MediaType mediaType = MediaType.parse("text/plain");
         Request request = new Request.Builder()
                 .url("https://api.thecatapi.com/v1/images/search")
@@ -132,5 +136,6 @@ public class GatosService {
             System.out.println("No se pudo crear el objeto Image");
         }
     }
-    }
+    
+}
 
