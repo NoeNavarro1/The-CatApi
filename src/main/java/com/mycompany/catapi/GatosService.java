@@ -27,7 +27,7 @@ public class GatosService {
         //crear menú de opciones para JoptionPane
         String menu = "Opciones: \n";
         
-        String[] opciones = {"Ver otro gato","Me encanta","Eliminar", "Regresar"};
+        String[] opciones = {"1.Ver otro gato","2.Me encanta❤️","3.Eliminar❎", "4.Regresar"};
         String idGato = unGato.getId();
         String opcion = (String) JOptionPane.showInputDialog(null, menu, idGato, JOptionPane.INFORMATION_MESSAGE, img, opciones, opciones[0]);
 
@@ -90,5 +90,47 @@ public class GatosService {
         }
     }
 
+    public void getMeEncanta() throws IOException {
+        OkHttpClient client = new OkHttpClient();
+
+        MediaType mediaType = MediaType.parse("text/plain");
+        Request request = new Request.Builder()
+                .url("https://api.thecatapi.com/v1/images/search")
+                .method("GET", null)
+                .build();
+        Response response = client.newCall(request).execute();
+
+        // Crear un objeto con formato JSON
+        String gatoJson = response.body().string();
+
+        // Quitar llave inicial y final
+        gatoJson = gatoJson.substring(1, gatoJson.length());
+        gatoJson = gatoJson.substring(0, gatoJson.length() - 1);
+
+        System.out.println("gatoJson: " + gatoJson);
+
+        //Crear un objeto de la clase Gson
+        Gson gson = new Gson();
+        Gato gato = gson.fromJson(gatoJson, Gato.class);
+
+        Image image = null;
+        try {
+            URL url = new URL(gato.getUrl());
+            image = ImageIO.read(url);
+
+            //redimensionar la imagen obtenida de THE CAT API
+            ImageIcon imgGato =new ImageIcon(image);
+            if (imgGato.getIconWidth() > 800) {
+                Image img = imgGato.getImage();
+                Image imgModificada = img.getScaledInstance(800, 600, java.awt.Image.SCALE_SMOOTH);
+                imgGato = new ImageIcon(imgModificada);
+            }
+
+            desplegarImagen(gato,imgGato);
+
+        } catch (Exception e) {
+            System.out.println("No se pudo crear el objeto Image");
+        }
+    }
     }
 

@@ -44,6 +44,7 @@ public class CatApi {
                             break;
                         case 2:
                             System.out.println("Vas a ver tus eliminados :(");
+                            
                             break;
                         case 3:
                             System.out.println("Vas a salir del sistema");
