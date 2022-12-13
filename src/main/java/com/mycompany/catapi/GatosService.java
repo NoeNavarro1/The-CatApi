@@ -25,11 +25,9 @@ public class GatosService {
     //renderiza una imagen dentro de un JoptionPane
     public void desplegarImagen(Gato unGato,ImageIcon img) throws IOException {
         //crear menú de opciones para JoptionPane
-        String menu = "Opciones: \n"
-                + "1. Ver otro gato \n"
-                + "2. Regresar \n";
-
-        String[] opciones = {"Ver otro gato", "Regresar"};
+        String menu = "Opciones: \n";
+        
+        String[] opciones = {"Ver otro gato","Me encanta","Eliminar", "Regresar"};
         String idGato = unGato.getId();
         String opcion = (String) JOptionPane.showInputDialog(null, menu, idGato, JOptionPane.INFORMATION_MESSAGE, img, opciones, opciones[0]);
 

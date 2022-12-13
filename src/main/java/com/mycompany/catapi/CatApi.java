@@ -21,6 +21,8 @@ public class CatApi {
         int opcionMenu = -1;
             String[] opciones = {
                 "1. Ver gatos",
+                "2. Ver me encanta",
+                "3. ver eliminados",
                 "2. Salir"
             };
             do{
@@ -38,8 +40,13 @@ public class CatApi {
                             service.getGatos();
                             break;
                         case 1:
+                            System.out.println("Vas a ver tus me encanta<3️");
+                            break;
+                        case 2:
+                            System.out.println("Vas a ver tus eliminados :(");
+                            break;
+                        case 3:
                             System.out.println("Vas a salir del sistema");
-                            
                     }
                 }
             }while(opcionMenu != 1);
