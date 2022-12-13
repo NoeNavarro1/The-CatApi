@@ -17,8 +17,8 @@ public class CatApi {
         GatosService catService = new GatosService();
         catService.getGatos();
         catService.getMeEncanta();
-        StackApi Api = new StackApi();
-        Api.getMeEncanta();
+        StackApi obj = new StackApi();
+        
 
         int opcionMenu = -1;
         String[] opciones = {
@@ -43,6 +43,7 @@ public class CatApi {
                         break;
                     case 1:
                         System.out.println("Vas a ver tus me encanta :");
+                        obj.mostrarPilaApi();
                         break;
                     case 2:
                         System.out.println("Vas a ver tus eliminados :");

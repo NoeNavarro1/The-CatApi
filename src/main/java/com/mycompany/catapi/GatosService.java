@@ -5,6 +5,7 @@
 package com.mycompany.catapi;
 
 import com.google.gson.Gson;
+import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -22,10 +23,12 @@ import javax.swing.JOptionPane;
  */
 public class GatosService {
 
+   
+
     //renderiza una imagen dentro de un JoptionPane
     public void desplegarImagen(Gato unGato,ImageIcon img) throws IOException {
-         StackApi Api = new StackApi();
-         Api.getMeEncanta();
+         StackApi obj = new StackApi();
+ 
         //crear menú de opciones para JoptionPane
         String menu = "Opciones: \n";
         
@@ -64,7 +67,6 @@ public class GatosService {
 
         // Crear un objeto con formato JSON
         String gatoJson = response.body().string();
-
         // Quitar llave inicial y final
         gatoJson = gatoJson.substring(1, gatoJson.length());
         gatoJson = gatoJson.substring(0, gatoJson.length() - 1);
@@ -96,6 +98,7 @@ public class GatosService {
     }
 
     public void getMeEncanta() throws IOException {
+        StackApi obj = new StackApi();
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("text/plain");
         Request request = new Request.Builder()
@@ -112,6 +115,7 @@ public class GatosService {
         gatoJson = gatoJson.substring(0, gatoJson.length() - 1);
 
         System.out.println("gatoJson: " + gatoJson);
+        System.out.println("Agregado");
 
         //Crear un objeto de la clase Gson
         Gson gson = new Gson();
@@ -135,6 +139,7 @@ public class GatosService {
         } catch (Exception e) {
             System.out.println("No se pudo crear el objeto Image");
         }
+    
     }
     
 }
