@@ -14,45 +14,52 @@ import javax.swing.JOptionPane;
 public class CatApi {
 
     public static void main(String[] args) throws IOException {
-        GatosService catService = new GatosService();
-        catService.getGatos();
-        catService.getMeEncanta();
-        StackApi obj = new StackApi();
-        
+        StackApi stackGatos = new StackApi();
 
         int opcionMenu = -1;
         String[] opciones = {
-            "1. Ver gatos",
-            "2. Ver me encanta",
-            "3. ver eliminados",
-            "2. Salir"
+            "1. Ver Gatos",
+            "2. Mostrar Me encanta <3",
+            "3. Revisar si el Stack está lleno",
+            "4.  Eliminar",
+            "5. Salir"
         };
+
         do {
-            String opcion = (String) JOptionPane.showInputDialog(null, "Gatito java", "Menú Principal",
-                    JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
+            String opcion = (String) JOptionPane.showInputDialog(null, "Gatitos Java", "Menú Principal",
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]);
 
             for (int i = 0; i < opciones.length; i++) {
                 if (opcion.equals(opciones[i])) {
                     opcionMenu = i;
                 }
-                GatosService service = new GatosService();
-                switch (opcionMenu) {
-                    case 0:
-                        System.out.println("Vas a ver un gato :");
-                        service.getGatos();
-                        break;
-                    case 1:
-                        System.out.println("Vas a ver tus me encanta :");
-                        obj.mostrarPilaApi();
-                        break;
-                    case 2:
-                        System.out.println("Vas a ver tus eliminados :");
-
-                        break;
-                    case 3:
-                        System.out.println("Vas a salir del sistema");
-                }
             }
-        } while (opcionMenu != 1);
+
+            GatosService service = new GatosService();
+
+            switch (opcionMenu) {
+                case 0 -> {
+                    System.out.println("Vas a ver a un gato.");
+                    Gato g = service.getGatos();
+                    stackGatos.push(g);
+                }
+                case 1 ->
+                    stackGatos.mostrarGato();
+                case 2 -> {
+                    if (stackGatos.estaLlena()) {
+                        System.out.println("Esta lleno.");
+                    } else {
+                        System.out.println("Todavia no está lleno");
+                    }
+                }
+                case 3 ->
+                    stackGatos.pop();
+                case 4 ->
+                    System.out.println("Saliendo del sistema.");
+            }
+        } while (opcionMenu != 4);
     }
 }

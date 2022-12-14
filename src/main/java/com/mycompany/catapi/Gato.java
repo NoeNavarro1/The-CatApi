@@ -9,6 +9,7 @@ package com.mycompany.catapi;
  * @author Noena
  */
 public class Gato {
+
     private String id;
     private String url;
     private String image;
@@ -36,6 +37,5 @@ public class Gato {
     public void setImage(String image) {
         this.image = image;
     }
-    
-    
+
 }
